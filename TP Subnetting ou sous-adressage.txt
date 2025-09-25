@@ -1,0 +1,45 @@
+TP Subnetting ou sous-adressage
+R0 :
+
+en
+conf t
+int g0/1 
+ip add 192.168.0.1 255.255.255.192
+no sh
+ip route 0.0.0.0 0.0.0.0 g0/1
+exit
+---------------------------------------
+R-1 :
+
+en
+conf t
+int g0/2
+ip add 192.168.0.2 255.255.255.192
+no sh
+exit
+int g0/0
+ip add 192.168.0.65 255.255.255.192
+no sh
+exit
+int g0/1
+ip add 192.168.0.129 255.255.255.192
+no sh
+exit
+ip route 0.0.0.0 0.0.0.0 g0/2
+ip route 0.0.0.0 0.0.0.0 g0/0
+exit
+------------------------------------------
+R-2 :
+
+en
+conf t
+int g0/0
+ip add 192.168.0.66 255.255.255.192
+no sh
+exit
+int g0/1
+ip add 192.168.0.193 255.255.255.192
+no sh
+exit
+ip route 0.0.0.0 0.0.0.0 g0/0
+exit
